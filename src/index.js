@@ -44,13 +44,16 @@ document.addEventListener("DOMContentLoaded", function(){
             let dogStatus = dog.isGoodDog
             buttonToggle.addEventListener("click", function(e){
 
-                if (e.target.innerHTML = "Bad Dog!"){
-                    e.target.innerHTML = "Good Dog!"
-                    dogStatus = true
-                } else if(e.target.innerHTML = "Good Dog!"){
+                // let dogTarget = e.target
 
-                  e.target.innerHTML = "Bad Dog!"
+                if (e.target.innerHTML === "Bad Dog!"){
+                                  
+                    dogStatus = true
+                    console.log(dogStatus)
+                } else if(e.target.innerHTML === "Good Dog!"){
+              
                     dogStatus = false
+                    console.log(dogStatus)
                 }
             
                 let body={isGoodDog:dogStatus}
@@ -64,7 +67,13 @@ document.addEventListener("DOMContentLoaded", function(){
              body: JSON.stringify(body)
             })
             .then(resp =>resp.json())
-            .then(console.log)
+            .then(data =>{
+                if (data.isGoodDog === true){
+                    e.target.innerHTML = "Good Dog!"
+                }else {
+                    e.target.innerHTML = "Bad Dog!"
+                }
+            })
              
             })
             //problem - toggle works only one time. from badDog to goodDog. And if the dog originally changes the isGoodBoy ='true' - the toggle doesn't work
